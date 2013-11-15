@@ -5,19 +5,18 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Calendar_Category {
+public class Caledar_Category_Update {
 	private static WebDriver driver; 
 	private static WebDriverWait wait; 
 	private static String URL_HOST = "http://localhost:8080"; 
 	private static String URL_PAGE = "http://localhost:8080/portal/intranet/calendar"; 
-	private static String ACC_USERNAME = "chinhdtt10";
+	private static String ACC_USERNAME = "chinhdtt9";
 	private static String ACC_PASS = "gtn123";
 	private static String STR_INPUT = "chinh123";
 	private static String STR_EXIT; 
@@ -41,9 +40,9 @@ public class Calendar_Category {
 		driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 		localLogin();
 //	-------	Add category methods		---------
-		addCategory();
+//		addCategory();
 //		addCategory_number();
-//		addCategory_exit();
+		addCategory_exit();
 //		addCategory_special();
 //		addCategory_blank();
 //		addCategory_startSpace();
@@ -63,7 +62,7 @@ public class Calendar_Category {
 //		cancel_DeleteCategory();
 		
 		wait = new WebDriverWait(driver,600); 
-		driver.close();
+//		driver.close();
 	}
 	
 	//login 
@@ -96,6 +95,7 @@ public class Calendar_Category {
 		driver.findElement(By.id("eventCategoryName")).sendKeys(STR_INPUT);
         driver.findElement(By.id("btnEventCategoryFormContainer")).click();
         Thread.sleep(1000);
+        
 //        wait = new WebDriverWait(driver,600); 
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_CLOSE_BTN)));
        
@@ -132,7 +132,7 @@ public class Calendar_Category {
 		        //Close button 
 //		       driver.findElement(By.xpath(XPATH_CLOSE_BTN)).click();
 		        driver.findElement(By.cssSelector(CSS_CLOSE_BTN)).click();
-		        System.out.println("add a number array");
+		        System.out.println("add an array number ");
 				}
 				catch(Exception ex){
 					ex.getMessage(); 
@@ -140,7 +140,7 @@ public class Calendar_Category {
 		}
 		
 	//Add exit value
-		public static void addCategory_exit() throws InterruptedException{
+		public static void addCategory_exit() throws Exception{
 			try{
 				String strExit; 
 				openPopup();
@@ -155,19 +155,45 @@ public class Calendar_Category {
 				driver.findElement(By.id("btnEventCategoryFormContainer")).click();
 				System.out.println("add_exit");
 				
-				//Click button on confirm box
-				driver.findElement(By.cssSelector(CSS_EVENT_CATEGORY)).click(); 
+				//------Click button on confirm box
+				
 				String childHandle =  driver.getWindowHandle();
-				 driver.switchTo().window(childHandle);
-				 System.out.println("new popup");
+				driver.switchTo().window(childHandle);
+							
+				System.out.println("get child popup1");
+//				JavascriptExecutor js = (JavascriptExecutor)driver; 
+				WebElement elm3 = driver.findElement(By.xpath("//*[@id='_438254538']")); 
+				elm3.click();
+				System.out.println(elm3.getTagName()); 
+				System.out.println("AAAA"); 
+				
+				WebElement elm4 = driver.findElement(By.xpath("/html/body/div/div[5]/div/span"));
+				System.out.println(elm4.getText()); 
+				 
+				driver.findElement(By.xpath("//*[text()='OK']")).click();
+				
+				System.out.println("get child popup2");
+//				js.executeScript("$('.btn').click();",element2);
+//				element2.click();
+    			System.out.println("get child popup3");
+//    			if(element2.getText().equalsIgnoreCase("OK")); 
+			
+			     
+//				JavascriptExecutor js = (JavascriptExecutor)driver; 
+//				WebElement element2 = driver.findElement(By.xpath("//html/body/div/div[5]/div[2]/div/a")); 
+//				System.out.println("Test2"); 
+//				js.executeScript("uiAction uiActionBorder",element2); 
+//				System.out.println("Test3");
+//				element2.click();
+//				System.out.println("Test4");
+				
+				
+				
+				System.out.println("get child popup");
 				
 		        Thread.sleep(1000);
-		        
-		        //-----Close button 
-//			  
-				driver.findElement(By.cssSelector(CSS_CLOSE_BTN)).click();
 			}
-			catch(InterruptedException ie){
+			catch(Exception ie){
 				ie.getMessage(); 
 			}
 			
@@ -344,7 +370,6 @@ public class Calendar_Category {
 			     
 			     Thread.sleep(1000);
 			     System.out.println("edit special value");
-			     
 			   //Close button 
 			    driver.findElement(By.cssSelector(CSS_CLOSE_BTN)).click();
 			}
